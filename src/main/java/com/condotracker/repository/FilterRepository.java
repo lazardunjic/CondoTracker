@@ -6,5 +6,5 @@ import com.condotracker.model.Filter;
 import java.util.List;
 
 public interface FilterRepository extends JpaRepository<Filter, Long>{
-    List<Filter> findByActive();
+    List<Filter> findByActiveTrue();
 }
