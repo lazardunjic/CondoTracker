@@ -3,6 +3,7 @@ package com.condotracker.scheduler;
 import com.condotracker.detector.ChangeDetection;
 import com.condotracker.filter.FilterService;
 import com.condotracker.model.Listing;
+import com.condotracker.notification.NotificationService;
 import com.condotracker.scraper.HaloOglasiScraper;
 import com.condotracker.scraper.CetiriZidaScraper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class Scheduler {
     @Autowired
     private ChangeDetection changeDetector;
 
+    @Autowired
+    private NotificationService notificationService;
+
     @Scheduled(fixedDelayString = "${scraper.interval.ms}")
     public void runScraper() {
         List<Listing> all = new ArrayList<>();
@@ -34,6 +38,7 @@ public class Scheduler {
 
         List<Listing> filtered = filterService.applyFilter(all);
         List<Listing> newListings = changeDetector.detectNew(filtered);
+        newListings.forEach(notificationService::sendAlert);
 
         System.out.println("New Ads: " + newListings.size());
     }
