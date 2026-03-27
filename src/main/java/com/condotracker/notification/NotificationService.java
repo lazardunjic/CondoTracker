@@ -18,13 +18,7 @@ public class NotificationService {
         try {
             String url = "https://api.telegram.org/bot" + token + "/sendMessage";
 
-            String text = String.format(
-                    listing.getTitle(),
-                    listing.getPrice() != null ? listing.getPrice() : 0,
-                    listing.getArea() != null ? listing.getArea() : 0,
-                    listing.getLocation(),
-                    listing.getUrl()
-            );
+            String text = listing.getUrl();
 
             RestTemplate restTemplate = new RestTemplate();
             Map<String, String> body = Map.of(
