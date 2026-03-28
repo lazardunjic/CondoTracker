@@ -6,6 +6,7 @@ import com.condotracker.model.Listing;
 import com.condotracker.notification.NotificationService;
 import com.condotracker.scraper.HaloOglasiScraper;
 import com.condotracker.scraper.CetiriZidaScraper;
+import com.condotracker.scraper.NekretnineRsScraper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -22,6 +23,11 @@ public class Scheduler {
     private CetiriZidaScraper cetiriZidaScraper;
 
     @Autowired
+    private NekretnineRsScraper nekretnineRsScraper;
+
+
+
+    @Autowired
     private FilterService filterService;
 
     @Autowired
@@ -35,6 +41,7 @@ public class Scheduler {
         List<Listing> all = new ArrayList<>();
         all.addAll(halooglasiScraper.scrape());
         all.addAll(cetiriZidaScraper.scrape());
+        all.addAll(nekretnineRsScraper.scrape());
 
         List<Listing> filtered = filterService.applyFilter(all);
         List<Listing> newListings = changeDetector.detectNew(filtered);
