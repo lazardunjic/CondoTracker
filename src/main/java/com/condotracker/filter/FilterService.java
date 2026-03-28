@@ -22,6 +22,12 @@ public class FilterService{
 
         Filter filter = activeFilters.get(0);
 
+        System.out.println("Ukupno oglasa: " + listings.size());
+        System.out.println("Filter: " + filter.getMinPrice() + "-" + filter.getMaxPrice());
+        System.out.println("Filter: " + filter.getMinArea() + "-" + filter.getMaxArea());
+        System.out.println("Filter: " + filter.getLocation());
+        listings.forEach(l -> System.out.println(l.getTitle() + " | cena: " + l.getPrice() + " | area: " + l.getArea()));
+
         return listings.stream()
                 .filter(l -> filter.getMinPrice() == null || l.getPrice() != null && l.getPrice() >= filter.getMinPrice())
                 .filter(l -> filter.getMaxPrice() == null || l.getPrice() != null && l.getPrice() <= filter.getMaxPrice())

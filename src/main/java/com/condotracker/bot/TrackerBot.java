@@ -93,7 +93,8 @@ public class TrackerBot implements SpringLongPollingBot, LongPollingUpdateConsum
             filter.setMaxPrice(Double.parseDouble(parts[2]));
             filter.setMinArea(Double.parseDouble(parts[3]));
             filter.setMaxArea(Double.parseDouble(parts[4]));
-            filter.setLocation(parts[5]);
+            String location = String.join(" ", java.util.Arrays.copyOfRange(parts, 5, parts.length));
+            filter.setLocation(location);
             filter.setActive(true);
             filterRepository.save(filter);
 

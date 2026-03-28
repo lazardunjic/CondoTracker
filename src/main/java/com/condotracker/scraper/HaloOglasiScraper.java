@@ -38,10 +38,11 @@ public class HaloOglasiScraper implements Scraper {
                     String itemUrl = "https://www.halooglasi.com" + href;
                     String location = item.select("ul.subtitle-places li:first-child").text();
                     String priceStr = item.select("div.central-feature span").attr("data-value");
-                    String areaStr = item.select("ul.product-features li:first-child .value-wrapper")
-                            .text()
-                            .replaceAll("[^0-9.,]", "")
-                            .replace(",", ".");
+                    String areaText = item.select("ul.product-features li:first-child .value-wrapper").text();
+                    String areaStr = "";
+                    if (areaText.contains("m2") || areaText.contains("m²")) {
+                        areaStr = areaText.split("m")[0].replaceAll("[^0-9,.]", "").replace(",", ".").trim();
+                    }
 
                     if (title.isEmpty() || itemUrl.isEmpty()) continue;
 
