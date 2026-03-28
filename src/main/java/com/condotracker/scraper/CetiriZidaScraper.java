@@ -52,6 +52,29 @@ public class CetiriZidaScraper implements Scraper {
                     if (!priceRaw.isEmpty())
                         listing.setPrice(Double.parseDouble(priceRaw));
 
+                    try {
+                        Document detailDoc = Jsoup.connect(itemUrl)
+                                .userAgent("Mozilla/5.0")
+                                .timeout(10000)
+                                .get();
+
+                        Elements liItems = detailDoc.select("ul.list-disc li span");
+                        for (Element li : liItems) {
+                            if (li.text().startsWith("Kvadratura:")) {
+                                String areaStr = li.text()
+                                        .replace("Kvadratura:", "")
+                                        .replaceAll("[^0-9.,]", "")
+                                        .replace(",", ".")
+                                        .trim();
+                                if (!areaStr.isEmpty())
+                                    listing.setArea(Double.parseDouble(areaStr));
+                                break;
+                            }
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
                     listings.add(listing);
 
                 } catch (Exception e) {
