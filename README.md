@@ -102,8 +102,8 @@ Filters are defined in the database and can be updated at runtime. Example filte
 
 ```json
 {
-  "minPrice": 50000,
-  "maxPrice": 120000,
+  "minPrice": 300,
+  "maxPrice": 600,
   "minArea": 40,
   "maxArea": 80,
   "location": "Novi Beograd",
@@ -117,19 +117,18 @@ Filters are defined in the database and can be updated at runtime. Example filte
 
 ```
 src/
-├── main/
-│   ├── java/com/condomonitor/
-│   │   ├── scraper/          # Site-specific scrapers (Jsoup)
-│   │   ├── filter/           # Filter engine
-│   │   ├── detector/         # Change detection logic
-│   │   ├── notification/     # Telegram bot integration
-│   │   ├── model/            # JPA entities
-│   │   ├── repository/       # Spring Data repositories
-│   │   └── scheduler/        # @Scheduled jobs
-│   └── resources/
-│       └── application.properties
-└── test/
-    └── java/com/condomonitor/
+└── main/
+    ├── java/com/condomonitor/
+    │   ├── scraper/          # Site-specific scrapers (Jsoup)
+    │   ├── filter/           # Filter engine
+    │   ├── detector/         # Change detection logic
+    │   ├── notification/     # Telegram bot integration
+    │   ├── model/            # JPA entities
+    │   ├── repository/       # Spring Data repositories
+    │   └── scheduler/        # @Scheduled jobs
+    └── resources/
+       └── application.properties
+
 ```
 
 ---
