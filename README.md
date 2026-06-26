@@ -1,4 +1,4 @@
-# CondoMonitor
+# CondoTracker
 
 A configurable web monitoring and alerting system that periodically scrapes real estate listing sites, detects new listings matching user-defined criteria, and delivers instant notifications via Telegram.
 
